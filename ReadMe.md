@@ -1,6 +1,6 @@
 ##STATX - Single Header Statistics Library for C++14
 
-###Calculating mean:
+### Calculating mean:
 
 ```c++
 std::vector<int> v = {10, 40, 30, 50, 20};
@@ -8,7 +8,7 @@ mean<int> m;
 std::cout << m.get_mean(v);
 ```
 
-###Calculating weighted mean:
+### Calculating weighted mean:
 
 ```c++
 std::vector<float> vec = {1,2,3,4};
@@ -17,7 +17,7 @@ weighted_mean<float> wm;
 float value = wm.get_weighted_mean(vec, weights);
 ```
 
-###Calculating the median
+### Calculating the median
 
 ```c++
 std::vector<int> v = {10, 40, 30, 50, 20};
@@ -25,7 +25,7 @@ median<int> m;
 std::cout << m.get_median(v);
 ```
 
-###Calculating the mode
+### Calculating the mode
 
 ```c++
 std::vector<int> v = {10, 40, 30, 50, 20};
@@ -33,7 +33,7 @@ mode<int> m;
 std::cout << m.get_mode(v);
 ```
 
-###Calculating the standard deviation
+### Calculating the standard deviation
 
 ```c++
 std::vector<double> v = {10, 40, 30, 50, 20};
@@ -41,7 +41,7 @@ standard_deviation<double> m;
 std::cout << m.get_standard_deviation(v);
 ```
 
-###Calculating the interquartile range
+### Calculating the interquartile range
 
 ```c++
 std::vector<float> v = { 6, 6 ,6, 6, 6.1, 8, 8, 8, 10, 10, 12, 12, 12, 12, 16, 16, 16, 16, 16, 20};
@@ -64,7 +64,7 @@ frequency_map_converter<float> c;
 c.to_vector(feq_map, v);
 ```
 
-###Calculating the range:
+### Calculating the range:
 
 ```c++
 std::vector<float> v = { 6, 6 ,6, 6, 6, 8, 8, 8, 10, 10, 12, 12, 12, 12, 16, 16, 16, 16, 16, 20};
@@ -72,7 +72,7 @@ range<float> m;
 std::cout << m.get_range(v);
 ```
 
-###Calculating the quartile:
+### Calculating the quartile:
 
 ```c++
 std::vector<float> v = {7, 15, 36, 37.5, 39, 40, 41};
