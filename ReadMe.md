@@ -188,4 +188,5 @@ int main()
 	std::cin >> i;
 }
 
+// Output: 3 0 1 2
 ```
