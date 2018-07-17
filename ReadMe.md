@@ -265,6 +265,16 @@ A coin is tossed once, what is the probability of getting Head? </br>
 Sample Space(S) = {“H”, “T”} </br>
 P(getting head) = ½ = 0.5 </br>
 
+#### code:
+```c++
+std::set<std::vector<std::string>> sample;
+sample.insert({ "H" });
+sample.insert({ "T" });
+sample_space<std::string> S(sample);
+// Probability of getting head
+std::cout << S.P({ "H" });
+```
+
 
 ## Text Processing:
 
