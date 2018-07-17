@@ -162,6 +162,43 @@ std::cout << "q1:\t" << result["q1"] << "\tq2:\t"<< result["q2"] << "\tq3:\t" <<
 
 ```
 
+# PROBABILITY
+
+Let us say that our sample space S = {1, 2, 3, 4, 5} and we have two events E1 and E2 where E1= {1,2} and E2= {1,2,3}.
+
+#### E1 U E2 = {1,2,3}
+
+```c++
+#include "statx.h"
+
+int main()
+{
+	std::set<std::vector<int>> sample;
+	for (int i = 1; i < 6; i++)
+	{
+		sample.insert({ i });
+	}
+	sample_space<int> s(sample);
+
+	std::set<std::vector<int>> e1_container;
+	e1_container.insert({ 1 });
+	e1_container.insert({ 2 });
+
+	std::set<std::vector<int>> e2_container;
+	e2_container.insert({ 1 });
+	e2_container.insert({ 2 });
+	e2_container.insert({ 3 });
+	
+	std::set<std::vector<int>> output;
+	event_union(e1_container, e2_container, s, output);
+
+	for (auto i : output) for (auto j : i) std::cout << j << " ";
+	int i;
+	std::cin >> i;
+}
+```
+
+
 ## Text Processing:
 
 ### Encoding the categorical data
