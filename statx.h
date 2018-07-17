@@ -2,6 +2,7 @@
 
 #include<iostream>
 #include<vector>
+#include<set>
 #include<map>
 #include<algorithm>
 #include<typeinfo>
@@ -383,4 +384,148 @@ public:
 		return transform(this->array);
 	}
 };
+
+/*
+Future Milestones - To implement mostlty used vectorizers from scikit-learn:
+	1. Implement CountVectorizer
+	2. Implement TfidfVectorizer
+*/
+
+// ============================  END OF TEXT TO NUMERICAL ENCODERS ==============================
+
+
+// ============================ ACTIVATION FUNCTIONS  ============================
+
+template <typename T>
+class activation_function
+{
+public:
+	T identity(T value)
+	{
+		return value;
+	}
+
+	long double sigmoid(T value)
+	{
+		T negative_value = -1 * value;
+		long double exponential = exp(negative_value);
+		long double result = 1 / (1 + exponential);
+		return result;
+	}
+
+	long double tan_h(T value)
+	{
+		long double pos_exp = exp(value);
+		long double neg_exp = exp(-1 * value);
+		return (pos_exp - neg_exp) / (pos_exp + neg_exp);
+	}
+
+	int threshold(T value)
+	{
+		if (value < 0) return 0;
+		else return 1;
+	}
+};
+
+
+// =================== PROBABILITY ===========================
+
+/* Exceptions in sample space */
+class element_not_in_sample_space : public std::exception
+{
+	virtual const char* what() const throw()
+	{
+		return "An element is found in an Event but not found in the sample space";
+	}
+};
+
+template <typename T>
+class sample_space
+{
+private:
+	std::set<std::vector<T>> *S;
+public:
+	// constructor to initialize the sample space
+	sample_space(std::set<std::vector<T>> &S)
+	{
+		this->S = &S;
+	}
+
+	// Check if an element is present in the sample space
+	const bool is_element_present(std::vector<T> element)
+	{
+		return S->find(element) != S->end();
+	}
+
+	// Returns the pointer to the sample space
+	std::set<std::vector<T>>* get_sample_space() {
+		return S;
+	}
+
+	// Probability for an event
+	long double P(std::vector<T> e)
+	{
+		if (!is_element_present(e)) throw element_not_in_sample_space();
+		long double result = (long double)e.size() / (long double)S->size();;
+		return result;
+	}
+
+	// Probability for multiple events
+	long double P(std::set<std::vector<T>> e)
+	{
+		for (auto i : e) if (!is_element_present(i)) throw element_not_in_sample_space();
+		long double result = (long double)e.size() / (long double)S->size();;
+		return result;
+	}
+};
+
+/* PROBABILITY FUNCTIONS */
+
+// Intersection
+template<typename T>
+void event_intersection(std::set<std::vector<T>> event1, std::set<std::vector<T>> event2, sample_space<T> S, std::set<std::vector<T>> &O)
+{
+	// Check if all elements are present in the sample space
+	for (auto i : event1)if (!S.is_element_present(i)) throw element_not_in_sample_space();
+	for (auto i : event2)if (!S.is_element_present(i)) throw element_not_in_sample_space();
+	// Perform the intersection opertaion
+	for (auto i : event1) if (event2.find(i) != event2.end()) O.insert(i);
+}
+
+// Union
+template<typename T>
+void event_union(std::set<std::vector<T>> event1, std::set<std::vector<T>> event2, sample_space<T> S, std::set<std::vector<T>> &O)
+{
+	// Check if all elements are present in the sample space
+	for (auto i : event1)if (!S.is_element_present(i)) throw element_not_in_sample_space();
+	for (auto i : event2)if (!S.is_element_present(i)) throw element_not_in_sample_space();
+	// Perform the union operation
+	for (auto i : event1) if (O.find(i) == O.end())O.insert(i);
+	for (auto i : event2) if (O.find(i) == O.end())O.insert(i);
+}
+
+// Complement
+template<typename T>
+void event_complement(std::set<std::vector<T>> e, sample_space<T> S, std::set<std::vector<T>> &O)
+{
+	// Check if all elements are present in the sample space
+	for (auto i : e)if (!S.is_element_present(i)) throw element_not_in_sample_space();
+	// Perform the complement operation
+	for (auto i = S.get_sample_space()->begin(); i != S.get_sample_space()->end(); ++i) if (e.find(*i) == e.end()) O.insert(*i);
+}
+
+// Check whether two events are disjoint
+template<typename T>
+bool is_disjoint(std::set<std::vector<T>> event1, std::set<std::vector<T>> event2)
+{
+	// Check if all elements are present in the sample space
+	for (auto i : event1)if (!S.is_element_present(i)) throw element_not_in_sample_space();
+	for (auto i : event2)if (!S.is_element_present(i)) throw element_not_in_sample_space();
+	// Check whether they are disjoint
+	for (auto i : event1)
+	{
+		if (event2.find(i) != event2.end()) return false;
+	}
+	return true;
+}
 
