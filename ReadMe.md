@@ -257,6 +257,15 @@ int main()
 }
 ```
 
+### Example:
+
+![](images/coin_example.JPG)
+
+A coin is tossed once, what is the probability of getting Head? </br>
+Sample Space(S) = {“H”, “T”} </br>
+P(getting head) = ½ = 0.5 </br>
+
+
 ## Text Processing:
 
 ### Encoding the categorical data
