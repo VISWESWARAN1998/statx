@@ -275,6 +275,16 @@ sample_space<std::string> S(sample);
 std::cout << S.P({ "H" });
 ```
 
+#### what is the probability of getting either head or tail ?
+```c++
+std::set<std::vector<std::string>> sample;
+sample.insert({ "H" });
+sample.insert({ "T" });
+sample_space<std::string> S(sample);
+// Probability of getting either head or tail
+std::cout << S.P(sample);
+```
+
 
 ## Text Processing:
 
