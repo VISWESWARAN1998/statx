@@ -198,6 +198,38 @@ int main()
 }
 ```
 
+#### E1 ∩ E2 = {1,2}
+
+```c++
+#include "statx.h"
+
+int main()
+{
+	std::set<std::vector<int>> sample;
+	for (int i = 1; i < 6; i++)
+	{
+		sample.insert({ i });
+	}
+	sample_space<int> s(sample);
+
+	std::set<std::vector<int>> e1_container;
+	e1_container.insert({ 1 });
+	e1_container.insert({ 2 });
+
+	std::set<std::vector<int>> e2_container;
+	e2_container.insert({ 1 });
+	e2_container.insert({ 2 });
+	e2_container.insert({ 3 });
+	
+	std::set<std::vector<int>> output;
+	event_intersection(e1_container, e2_container, s, output);
+
+	for (auto i : output) for (auto j : i) std::cout << j << " ";
+	int i;
+	std::cin >> i;
+}
+```
+
 
 ## Text Processing:
 
